@@ -1,0 +1,21 @@
+{
+    "name": "docteurklein/human-readable-unit",
+    "description": "Format values like duration or byte size in a human readable way",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Klein Florian",
+            "email": "florian.klein@free.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "HumanUnit\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^5.0"
+    },
+    "require": {}
+}
