@@ -4,67 +4,63 @@ namespace HumanUnit;
 
 final class Duration
 {
-    private $micro_seconds;
+    use Format;
 
-    private static $steps = [
-        'y'  => 365 * 24 * 60 * 60 * 1000 * 1000,
-        'd'  => 24 * 60 * 60 * 1000 * 1000,
-        'h'  => 60 * 60 * 1000 * 1000,
-        'm'  => 60 * 1000 * 1000,
-        's'  => 1000 * 1000,
-        'ms' => 1000,
-        'µs' => 1,
+    private $nano_seconds;
+
+    private static $multiples = [
+        'y'  => 365 * 24 * 60 * 60 * 1000 * 1000 * 1000,
+        'd'  => 24 * 60 * 60 * 1000 * 1000 * 1000,
+        'h'  => 60 * 60 * 1000 * 1000 * 1000,
+        'm'  => 60 * 1000 * 1000 * 1000,
+        's'  => 1000 * 1000 * 1000,
+        'ms' => 1000 * 1000,
+        'µs' => 1000,
+        'ns' => 1,
     ];
 
-    private function __construct(int $micro_seconds)
+    private function __construct(int $nano_seconds)
     {
-        $this->micro_seconds = $micro_seconds;
+        $this->nano_seconds = $nano_seconds;
+    }
+
+    public static function nano_seconds(int $nano_seconds): self
+    {
+        return new self($nano_seconds);
     }
 
     public static function micro_seconds(int $micro_seconds): self
     {
-        return new self($micro_seconds);
+        return new self($micro_seconds * self::$multiples['µs']);
     }
 
     public static function seconds(int $seconds): self
     {
-        return new self($seconds * self::$steps['s']);
+        return new self($seconds * self::$multiples['s']);
     }
 
     public static function minutes(int $minutes): self
     {
-        return new self($minutes * self::$steps['m']);
+        return new self($minutes * self::$multiples['m']);
     }
 
     public static function hours(int $hours): self
     {
-        return new self($hours * self::$steps['h']);
+        return new self($hours * self::$multiples['h']);
     }
 
     public static function days(int $days): self
     {
-        return new self($days * self::$steps['d']);
+        return new self($days * self::$multiples['d']);
     }
 
     public static function years(int $years): self
     {
-        return new self($years * self::$steps['y']);
+        return new self($years * self::$multiples['y']);
     }
 
     public function format(): string
     {
-        return self::_format($this->micro_seconds);
-    }
-
-    private static function _format(int $value): string
-    {
-        foreach (self::$steps as $unit => $step) {
-            if ($value >= $step) {
-                $multiple = intdiv($value, $step);
-                $rest = intval(fmod($value, $step));
-                return trim(sprintf('%d%s %s', $multiple, $unit, self::_format($rest)));
-            }
-        }
-        return '';
+        return self::_format($this->nano_seconds);
     }
 }

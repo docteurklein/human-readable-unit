@@ -8,6 +8,12 @@ use Prophecy\Argument;
 
 class DurationSpec extends ObjectBehavior
 {
+    function it_constructs_from_nano_seconds()
+    {
+        $this->beConstructedThrough('nano_seconds', [1]);
+        $this->format()->shouldBe('1ns');
+    }
+
     function it_constructs_from_micro_seconds_1()
     {
         $this->beConstructedThrough('micro_seconds', [1]);
