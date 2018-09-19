@@ -103,4 +103,10 @@ class DurationSpec extends ObjectBehavior
         $this->beConstructedThrough('seconds', [86400 * 400]);
         $this->humanize()->shouldBe('1y 35d');
     }
+
+    function it_diffs()
+    {
+        $this->beConstructedThrough('seconds', [20]);
+        $this->diff(Duration::seconds(12))->shouldBeLike(Duration::seconds(8));
+    }
 }

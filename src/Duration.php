@@ -74,4 +74,9 @@ final class Duration
     {
         return floatval($this->nano_seconds / self::multiples[$unit]);
     }
+
+    public function diff(self $other): self
+    {
+        return new self($this->nano_seconds - $other->nano_seconds);
+    }
 }

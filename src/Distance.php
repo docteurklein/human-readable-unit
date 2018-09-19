@@ -46,4 +46,9 @@ final class Distance
     {
         return floatval($this->nano_meters / self::multiples[$unit]);
     }
+
+    public function diff(self $other): self
+    {
+        return new self($this->nano_meters - $other->nano_meters);
+    }
 }
