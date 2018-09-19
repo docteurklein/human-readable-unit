@@ -31,3 +31,9 @@ catch(\InvalidArgumentException $e) {
 
 $duration = \HumanUnit\Duration::nano_seconds(intval(1e30));
 echo $duration->humanize(), "\n";
+
+$quantity = \HumanUnit\Cardinality::kilo(1002);
+echo $quantity->humanize(), "\n";
+
+$memory_size = \HumanUnit\Bit::byte(1024);
+echo $memory_size->humanize(), "\n";
