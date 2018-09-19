@@ -2,13 +2,14 @@
 
 namespace HumanUnit;
 
+use function HumanUnit\format;
+use function HumanUnit\from_human;
+
 final class Duration
 {
-    use Format;
-
     private $nano_seconds;
 
-    private static $multiples = [
+    private const multiples = [
         'y'  => 365 * 24 * 60 * 60 * 1000 * 1000 * 1000,
         'd'  => 24 * 60 * 60 * 1000 * 1000 * 1000,
         'h'  => 60 * 60 * 1000 * 1000 * 1000,
@@ -24,6 +25,11 @@ final class Duration
         $this->nano_seconds = $nano_seconds;
     }
 
+    public static function from_human(string $representation): self
+    {
+        return new self(from_human(self::multiples, $representation));
+    }
+
     public static function nano_seconds(int $nano_seconds): self
     {
         return new self($nano_seconds);
@@ -31,36 +37,36 @@ final class Duration
 
     public static function micro_seconds(int $micro_seconds): self
     {
-        return new self($micro_seconds * self::$multiples['µs']);
+        return new self($micro_seconds * self::multiples['µs']);
     }
 
     public static function seconds(int $seconds): self
     {
-        return new self($seconds * self::$multiples['s']);
+        return new self($seconds * self::multiples['s']);
     }
 
     public static function minutes(int $minutes): self
     {
-        return new self($minutes * self::$multiples['m']);
+        return new self($minutes * self::multiples['m']);
     }
 
     public static function hours(int $hours): self
     {
-        return new self($hours * self::$multiples['h']);
+        return new self($hours * self::multiples['h']);
     }
 
     public static function days(int $days): self
     {
-        return new self($days * self::$multiples['d']);
+        return new self($days * self::multiples['d']);
     }
 
     public static function years(int $years): self
     {
-        return new self($years * self::$multiples['y']);
+        return new self($years * self::multiples['y']);
     }
 
     public function format(): string
     {
-        return self::_format($this->nano_seconds);
+        return format(self::multiples, $this->nano_seconds);
     }
 }

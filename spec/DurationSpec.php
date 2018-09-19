@@ -8,6 +8,12 @@ use Prophecy\Argument;
 
 class DurationSpec extends ObjectBehavior
 {
+    function it_constructs_from_human_representation()
+    {
+        $this->beConstructedThrough('from_human', ['1d 22h 13s']);
+        $this->format()->shouldBe('1d 22h 13s');
+    }
+
     function it_constructs_from_nano_seconds()
     {
         $this->beConstructedThrough('nano_seconds', [1]);

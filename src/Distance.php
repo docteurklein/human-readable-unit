@@ -2,20 +2,20 @@
 
 namespace HumanUnit;
 
+use function HumanUnit\format;
+use function HumanUnit\from_human;
+
 final class Distance
 {
-    use Format;
-
     private $nano_meters;
 
-    private static $multiples = [
+    private const multiples = [
         'km' => 1000 * 1000 * 1000 * 1000,
         'm'  => 1000 * 1000 * 1000,
         'mm' => 1000 * 1000,
         'µm' => 1000,
         'nm' => 1,
     ];
-
 
     private function __construct(int $nano_meters)
     {
@@ -29,6 +29,6 @@ final class Distance
 
     public function format(): string
     {
-        return self::_format($this->nano_meters);
+        return format(self::multiples, $this->nano_meters);
     }
 }

@@ -12,7 +12,11 @@
     "autoload": {
         "psr-4": {
             "HumanUnit\\": "src/"
-        }
+        },
+        "files": [
+            "src/Format.php",
+            "src/FromHuman.php"
+        ]
     },
     "require-dev": {
         "phpspec/phpspec": "^5.0"
