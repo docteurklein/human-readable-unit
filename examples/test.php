@@ -3,10 +3,10 @@
 require(__DIR__.'/../vendor/autoload.php');
 
 $duration = \HumanUnit\Duration::seconds(86462);
-echo $duration->format(), "\n";
+echo $duration->humanize(), "\n";
 
 $distance = \HumanUnit\Distance::nano_meters(intval(2 + 1e9 + 1e12));
-echo $distance->format(), "\n";
+echo $distance->humanize(), "\n";
 
 $distance1 = \HumanUnit\Distance::from_human('1km');
 $distance2 = \HumanUnit\Distance::from_human('1000m');
@@ -30,4 +30,4 @@ catch(\InvalidArgumentException $e) {
 }
 
 $duration = \HumanUnit\Duration::nano_seconds(intval(1e30));
-echo $duration->format(), "\n";
+echo $duration->humanize(), "\n";

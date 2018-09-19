@@ -11,13 +11,13 @@ class DistanceSpec extends ObjectBehavior
     function it_constructs_from_nano_meters()
     {
         $this->beConstructedThrough('nano_meters', [1]);
-        $this->format()->shouldBe('1nm');
+        $this->humanize()->shouldBe('1nm');
     }
 
     function it_constructs_from_human_representation()
     {
         $this->beConstructedThrough('from_human', ['1km 2m']);
-        $this->format()->shouldBe('1km 2m');
+        $this->humanize()->shouldBe('1km 2m');
     }
 
     function it_refuses_invalid_human_representation_1()
@@ -41,6 +41,12 @@ class DistanceSpec extends ObjectBehavior
     function it_formats_kilometers()
     {
         $this->beConstructedThrough('nano_meters', [intval(2 + 1e9 + 1e12)]);
-        $this->format()->shouldBe('1km 1m 2nm');
+        $this->humanize()->shouldBe('1km 1m 2nm');
+    }
+
+    function it_formats_to_given_unit()
+    {
+        $this->beConstructedThrough('meters', [1250]);
+        $this->to_unit('km')->shouldBe(1.25);
     }
 }

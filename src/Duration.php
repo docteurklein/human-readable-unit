@@ -2,7 +2,7 @@
 
 namespace HumanUnit;
 
-use function HumanUnit\format;
+use function HumanUnit\humanize;
 use function HumanUnit\from_human;
 
 final class Duration
@@ -65,8 +65,13 @@ final class Duration
         return new self($years * self::multiples['y']);
     }
 
-    public function format(): string
+    public function humanize(): string
     {
-        return format(self::multiples, $this->nano_seconds);
+        return humanize(self::multiples, $this->nano_seconds);
+    }
+
+    public function to_unit(string $unit): float
+    {
+        return floatval($this->nano_seconds / self::multiples[$unit]);
     }
 }

@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace HumanUnit;
 
-use function HumanUnit\format;
+use function HumanUnit\humanize;
 use function HumanUnit\from_human;
 
 final class Distance
@@ -32,8 +32,18 @@ final class Distance
         return new self($nano_meters);
     }
 
-    public function format(): string
+    public static function meters(int $meters)
     {
-        return format(self::multiples, $this->nano_meters);
+        return new self($meters * self::multiples['m']);
+    }
+
+    public function humanize(): string
+    {
+        return humanize(self::multiples, $this->nano_meters);
+    }
+
+    public function to_unit(string $unit): float
+    {
+        return floatval($this->nano_meters / self::multiples[$unit]);
     }
 }

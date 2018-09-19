@@ -14,7 +14,7 @@
             "HumanUnit\\": "src/"
         },
         "files": [
-            "src/Format.php",
+            "src/Humanize.php",
             "src/FromHuman.php"
         ]
     },
