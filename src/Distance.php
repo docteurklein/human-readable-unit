@@ -22,6 +22,11 @@ final class Distance
         $this->nano_meters = $nano_meters;
     }
 
+    public static function from_human(string $representation): self
+    {
+        return new self(from_human(self::multiples, $representation));
+    }
+
     public static function nano_meters(int $nano_meters)
     {
         return new self($nano_meters);

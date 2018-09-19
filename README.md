@@ -18,5 +18,20 @@ echo $duration->format(); // '1d 1m 2s'
 
 ```php
 $distance = \HumanUnit\Distance::nano_meters(intval(2 + 1e9 + 1e12));
-echo $duration->format(); // '1km 1m 2nm'
+echo $distance->format(); // '1km 1m 2nm'
+```
+
+### From human representation
+
+```php
+$distance = \HumanUnit\Distance::from_human('1km 1m 2nm');
+echo $distance->format(); // '1km 1m 2nm'
+```
+
+### Comparisons
+
+```php
+$distance1 = \HumanUnit\Distance::from_human('1km');
+$distance2 = \HumanUnit\Distance::from_human('1000m');
+assert($distance1 == $distance2);
 ```
