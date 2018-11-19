@@ -11,6 +11,7 @@ final class Duration
 
     private const multiples = [
         'y'  => 365 * 24 * 60 * 60 * 1000 * 1000 * 1000,
+        'w'  => 7 * 24 * 60 * 60 * 1000 * 1000 * 1000,
         'd'  => 24 * 60 * 60 * 1000 * 1000 * 1000,
         'h'  => 60 * 60 * 1000 * 1000 * 1000,
         'm'  => 60 * 1000 * 1000 * 1000,
@@ -38,6 +39,11 @@ final class Duration
     public static function micro_seconds(int $micro_seconds): self
     {
         return new self($micro_seconds * self::multiples['µs']);
+    }
+
+    public static function milli_seconds(int $milli_seconds): self
+    {
+        return new self($milli_seconds * self::multiples['ms']);
     }
 
     public static function seconds(int $seconds): self
@@ -78,5 +84,12 @@ final class Duration
     public function diff(self $other): self
     {
         return new self($this->nano_seconds - $other->nano_seconds);
+    }
+
+    public function ratio(self $other): float
+    {
+        $diff = $this->diff($other);
+
+        return $diff->nano_seconds > 0 ? $this->nano_seconds / $other->nano_seconds : $other->nano_seconds / $this->nano_seconds;
     }
 }
